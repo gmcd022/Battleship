@@ -1,5 +1,6 @@
 module.exports = {
     "extends": ["eslint:recommended", "prettier"],
+    "ignorePatterns": ["webpack.config.js"],
     "rules": {
         // enable additional rules
         //"quotes": ["error", "double"],
