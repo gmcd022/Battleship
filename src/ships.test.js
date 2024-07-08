@@ -2,7 +2,7 @@ Ship = require('./ships');
 let MSPete;
 
 beforeEach(() => {
-    MSPete = Ship('tinny', 4)
+    MSPete = Ship('tinny', 4, true)
 });
 
 test('make boat', () => {
@@ -14,7 +14,12 @@ test('Ship methods available', () => {
 })
 
 test('ship length', () => {
-    expect(MSPete.length).toBe(4)
+    expect(MSPete.shipLength).toBe(4)
+})
+
+test('boat orientation', () => {
+    let testFrigate = Ship('frigate', 2, true)
+    expect(testFrigate.horizontal).toBe(true);
 })
 
 // moving on to Ships functions
@@ -37,3 +42,4 @@ test('no longer afloat', () => {
     MSPete.hit();
     expect(MSPete.isSunk()).toBe(true)
 })
+

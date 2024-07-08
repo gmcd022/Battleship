@@ -1,4 +1,6 @@
-function Ship(shipType, length) {
+//change position to orientation
+
+function Ship(shipType, length, orientation) {
     let hits = 0
     let sunk = false
 
@@ -18,12 +20,18 @@ function Ship(shipType, length) {
         return hits
     }
 
+    function isHorizontal() {
+        return orientation
+    }
+
     return {
         shipName: shipType,
-        length: length,
-        get isSunk() {return isSunk},
-        get hit() {return hit},
-        get hitCount() {return hitCount}
+        shipLength: length,
+        horizontal: orientation,
+        isSunk,
+        hit,
+        hitCount,
+        isHorizontal
     };
 }
 
