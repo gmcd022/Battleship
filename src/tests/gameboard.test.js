@@ -1,5 +1,5 @@
-Gameboard = require('./gameboard');
-Ship = require('./ships');
+import Gameboard from '../gameboard';
+import Ship from '../ships';
 
 test('build gameboard', () => {
     expect(typeof Gameboard()).toBe('object')
@@ -152,5 +152,5 @@ test('shot invalid', () => {
     let frigate = Ship('frigate', 2, true);
     testBoard.placeShip(1,2, frigate);
     testBoard.receiveAttack(2,2);
-    expect(testBoard.receiveAttack(2,2)).toThrow()
+    expect(() => {testBoard.receiveAttack(2,2)}).toThrow(Error)
 })

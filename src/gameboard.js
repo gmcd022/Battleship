@@ -1,8 +1,6 @@
-//add iteration to placeShip
+import Ship from './ships';
 
-Ship = require('./ships');
-
-function Gameboard() {
+export default function Gameboard() {
     let gameboard = [];
     let missedShots = [];
     let hitShots = [];
@@ -93,7 +91,5 @@ function Gameboard() {
         else return false
     }
 
-    return {gameboard, placeShip, receiveAttack, getGameboard, getHitShots, getMissedShots, getAllShots, logSink, validShot, allShipsSunk};
+    return {gameboard, placeShip, receiveAttack, getGameboard, getHitShots, getMissedShots, getAllShots, getSunkShips, logSink, validShot, allShipsSunk};
 }
-
-module.exports = Gameboard;

@@ -1,4 +1,4 @@
-Ship = require('./ships');
+import Ship from '../ships';
 let MSPete;
 
 beforeEach(() => {
