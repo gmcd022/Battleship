@@ -1,6 +1,7 @@
 module.exports = {
     "extends": ["eslint:recommended", "prettier"],
     "parserOptions": {"emcaVersion": 6},
+    "parser": "babel-eslint",
     "ignorePatterns": ["webpack.config.js"],
     "rules": {
         // enable additional rules

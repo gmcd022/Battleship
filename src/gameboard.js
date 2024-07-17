@@ -12,42 +12,41 @@ export default function Gameboard() {
         gameboard.push(['','','','','','','','','',''])
     }
 
-    function placeShip(x, y, shipObject) {
+    function placeShip(shipObject, x, y) {
         // will need to add errors for ships longer than one cell placed on edge (out of bounds)
         let length = shipObject.shipLength;
         let horizontal = shipObject.horizontal;
     
         for (let i = 0; i < length; i++) {
             if(horizontal){
-                gameboard[x+i][y] = shipObject
+                gameboard[y][x+i] = shipObject
             }
             else{
-                gameboard[x][y+i] = shipObject
+                gameboard[y+i][x] = shipObject
             }
         }    
-        return gameboard[x][y];
+        return gameboard[y][x];
+
     }
     
+    function receiveAttack(x, y) {
 
-    function receiveAttack(x,y) {
-        let target = gameboard[x][y];
-        //check if target empty, records shot in missedShots or hitShots
+
+        let target = gameboard[y][x];
 
         if (!validShot(x,y)) {
             throw new Error ('target invalid, cell has already been shot at or is out of bounds')
         }
-
-
         if (target === '') {
             missedShots.push([x,y]);
+            return false
         }
         else{
             target.hit();
             hitShots.push([x,y]);
             logSink(target);
+            return true
         }
-        
-        return target
     }
 
     function validShot(x,y) {

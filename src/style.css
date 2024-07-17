@@ -1,3 +1,44 @@
-p {
-  color: red;
+* {
+  box-sizing: border-box;
+}
+
+#page-container {
+  display: grid;
+  grid-template-columns: 1fr max(20vw, 300px) 1fr;
+  grid-template-rows: 0.8fr 0.1fr;
+
+  height: 100%;
+}
+
+.cell {
+  border: 1px solid black;
+  width: 10%;
+  height: 10%;
+  background-color: cornflowerblue;
+}
+
+.board {
+  width: clamp(350px, 30vw, 40vw);
+  height: clamp(350px, 30vw, 40vw);
+
+  justify-self: center;
+  align-self: center;
+
+  border:3px solid black;
+  background-color: transparent;
+
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ship {
+  background-color: blue;
+}
+
+.hit {
+  background-color: red;
+}
+
+.miss {
+  background-color: ghostwhite;
 }
