@@ -1,50 +1,72 @@
 import Ship from './ships';
 import Player from './player';
+import Gameboard from './gameboard';
 
-let carrier = Ship('Carrier', 5, false);
-let battleship = Ship('Battleship', 4, true);
-let destroyer = Ship('Destroyer', 3, false);
-let submarine = Ship('Submarine', 3, false);
-let patrolBoat = Ship('Patrol Boat', 2, false);
-
-const bot = Player('bot');
-const user = Player('user');
+import fillBotBoard from './renderBot';
+import fillUserBoard from './renderUser';
+import showUserShips from './showUserShips';
 
 
-function populateUserBoard() {
+function reset() {
+    document.querySelectorAll('.cell').forEach((cell) => {
+        cell.remove();
+    })
+
+    const user = Player(user)
+    const bot = Player(bot)
+
+    const botGameboard = new Gameboard();
+    const userGameboard = new Gameboard();
+
+    user.gameboard = userGameboard;
+    bot.gameboard = botGameboard;
+
+    const userBoard = document.querySelector('.userGameboard');
+    const botBoard = document.querySelector('.botGameboard');
+
+    fillBotBoard(botBoard, botGameboard, userGameboard); //function to create bot DOM grid
+    fillUserBoard(userBoard); //function to create user DOM grid 
     
-    user.gameboard.placeShip(carrier, 4, 2);
-    user.gameboard.placeShip(battleship, 0, 8);
-    user.gameboard.placeShip(destroyer, 1, 3);
-    user.gameboard.placeShip(submarine, 9, 3);
-    user.gameboard.placeShip(patrolBoat, 6, 0);
+    populateBotBoard(botGameboard); //temp function placing ships on bot board
+    populateUserBoard(userGameboard); // temp function placing ships on user board
+
+    showUserShips(userGameboard.getGameboard());
+
+    return console.log("RESET");
 }
 
-function populateBotBoard() {
+function populateUserBoard(userGameboard) {
     
-    bot.gameboard.placeShip(carrier, 4, 2);
-    bot.gameboard.placeShip(battleship, 0, 8);
-    bot.gameboard.placeShip(destroyer, 1, 3);
-    bot.gameboard.placeShip(submarine, 9, 3);
-    bot.gameboard.placeShip(patrolBoat, 6, 0);
+    let carrier = Ship('Carrier', 5, false);
+    let battleship = Ship('Battleship', 4, true);
+    let destroyer = Ship('Destroyer', 3, false);
+    let submarine = Ship('Submarine', 3, false);
+    let patrolBoat = Ship('Patrol Boat', 2, false);
+
+    userGameboard.placeShip(carrier, 4, 2);
+    userGameboard.placeShip(battleship, 0, 8);
+    userGameboard.placeShip(destroyer, 1, 3);
+    userGameboard.placeShip(submarine, 9, 4);
+    userGameboard.placeShip(patrolBoat, 6, 0);
 }
-//Add reset function to this module
 
-
-// I think I can delete both of these getGameboard functions
-function getUserGameboard() {
-    return user.gameboard.getGameboard()
-}
-
-function getBotGameboard() {
-    return bot.gameboard.getGameboard()
+function populateBotBoard(botGameboard) {
+   
+    let carrier = Ship('Carrier', 5, false);
+    let battleship = Ship('Battleship', 4, true);
+    let destroyer = Ship('Destroyer', 3, false);
+    let submarine = Ship('Submarine', 3, false);
+    let patrolBoat = Ship('Patrol Boat', 2, false);
+    
+    botGameboard.placeShip(carrier, 4, 2);
+    botGameboard.placeShip(battleship, 0, 8);
+    botGameboard.placeShip(destroyer, 1, 3);
+    botGameboard.placeShip(submarine, 9, 3);
+    botGameboard.placeShip(patrolBoat, 6, 0);
 }
 
 export {
     populateBotBoard, 
-    populateUserBoard, 
-    getUserGameboard,
-    getBotGameboard,
-    bot,
-    user,
+    populateUserBoard,
+    reset
 };

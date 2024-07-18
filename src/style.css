@@ -10,6 +10,24 @@
   height: 100%;
 }
 
+#userBoardContainer {
+  justify-self: center;
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#botBoardContainer {
+  justify-self: center;
+  grid-column: 3/4;
+  grid-row: 1/2
+}
+
+.button-container {
+  grid-column: 1/2;
+  grid-row: 2/3;
+
+  justify-self: center;
+}
+
 .cell {
   border: 1px solid black;
   width: 10%;

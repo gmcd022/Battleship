@@ -1,15 +1,14 @@
-export default function hitDetector(cell, i, player) {
+import botTurn from "./botTurn";
+
+export default function hitDetector(cell, i, botGameboard, userGameboard) {
     const row = Math.floor(i/10);
     const col = i % 10;
-    const madeHit = player.gameboard.receiveAttack(col, row);
+    const madeHit = botGameboard.receiveAttack(col, row);
     if (madeHit) {
         cell.classList.add('hit');
     } else {
         cell.classList.add('miss');   
     }
-    if (player.gameboard.allShipsSunk()) alert(`${player} loses`);
-    // call bot attack function here
+    if (botGameboard.allShipsSunk()) alert('Victory!');
+    botTurn(userGameboard)
     }
-
-// likely need to remove gameboard in receiveAttack function
-// add gameboard to parameters

@@ -1,31 +1,11 @@
 import './style.css';
-import Ship from './ships';
-import Gameboard from './gameboard';
-import Player from './player';
-import fillBotBoard from './renderBot';
-import fillUserBoard from './renderUser';
-import showUserShips from './showUserShips';
-import hitDetector from './hitDetector';
-import { populateBotBoard,
-     populateUserBoard,  
-     getUserGameboard, 
-     getBotGameboard,
-     bot,
-     user
-    } from './gamelogic';
 
-const userBoard = document.querySelector('.userGameboard');
-const botBoard = document.querySelector('.botGameboard');
+import { reset } from './gamelogic';
 
-// delete if not used
-const userBoardContainer = document.querySelector('.userBoardContainer');
-const botBoardContainer = document.querySelector('.botBoardContainer');
+// todo: 1.reset function - gamelogic, game over function -, 2.gameover/reset html modal, 3+.placeShips random or manually at start of game
 
 
-fillBotBoard(botBoard, bot); //function to create bot DOM grid
-fillUserBoard(userBoard); //function to create user DOM grid
+const resetButton = document.querySelector('.resetButton');
+resetButton.addEventListener('click', () => {reset()});
 
-populateBotBoard(); //temp function placing ships on bot board
-populateUserBoard(); // temp function placing ships on user board
-
-setTimeout(showUserShips(user.gameboard.getGameboard()), 3000);
+reset()

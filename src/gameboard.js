@@ -30,8 +30,6 @@ export default function Gameboard() {
     }
     
     function receiveAttack(x, y) {
-
-
         let target = gameboard[y][x];
 
         if (!validShot(x,y)) {
