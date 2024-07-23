@@ -13,9 +13,14 @@ export default function Gameboard() {
     }
 
     function placeShip(shipObject, x, y) {
-        // will need to add errors for ships longer than one cell placed on edge (out of bounds)
         let length = shipObject.shipLength;
         let horizontal = shipObject.horizontal;
+
+        // this validDrop check redundant when using randomized ship placement
+        // still useful if using manual placement
+        if (!validDrop(x, y, length, horizontal)) {
+            throw new Error ('placement invalid, entireity of ship must be in bounds')
+        }
     
         for (let i = 0; i < length; i++) {
             if(horizontal){
@@ -56,6 +61,29 @@ export default function Gameboard() {
         else return true
     }
 
+    function validDrop(x, y, length, horizontal) {
+        if (horizontal) return x + length < 11;
+        else return y + length < 11
+    }
+
+    function emptyCells(shipObject, x , y) {
+        let horizontal  = shipObject.horizontal;
+        let length = shipObject.shipLength;
+
+        if (!validDrop(x, y, length, horizontal)) {
+            return false
+        }
+
+        for (let i = 0; i < length; i++) {
+            if (horizontal && (gameboard[y][x+i] !== "")) {
+                return false
+            } if (!horizontal && (gameboard[y+i][x] !== "")) {
+                return false
+            } else continue
+        }
+        return true
+    }
+
     function getGameboard() {
         return gameboard
     }
@@ -88,5 +116,19 @@ export default function Gameboard() {
         else return false
     }
 
-    return {gameboard, placeShip, receiveAttack, getGameboard, getHitShots, getMissedShots, getAllShots, getSunkShips, logSink, validShot, allShipsSunk};
+    return {
+        gameboard, 
+        placeShip, 
+        receiveAttack, 
+        getGameboard, 
+        getHitShots, 
+        getMissedShots, 
+        getAllShots, 
+        getSunkShips, 
+        logSink, 
+        validShot, 
+        validDrop, 
+        allShipsSunk,
+        emptyCells
+    };
 }

@@ -21,11 +21,13 @@
   grid-row: 1/2
 }
 
-.button-container {
-  grid-column: 1/2;
+.buttonContainer {
+  grid-column: 2/3;
   grid-row: 2/3;
 
+  display: flex;  
   justify-self: center;
+
 }
 
 .cell {

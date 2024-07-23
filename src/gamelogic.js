@@ -27,30 +27,49 @@ function reset() {
     fillBotBoard(botBoard, botGameboard, userGameboard); //function to create bot DOM grid
     fillUserBoard(userBoard); //function to create user DOM grid 
     
-    populateBotBoard(botGameboard); //temp function placing ships on bot board
-    populateUserBoard(userGameboard); // temp function placing ships on user board
+    //populateBotBoard(botGameboard); //temp function placing ships on bot board
+    populateBoardRandom(botGameboard);
+    populateBoardRandom(userGameboard); // temp function placing ships on user board
 
     showUserShips(userGameboard.getGameboard());
 
     return console.log("RESET");
 }
 
-function populateUserBoard(userGameboard) {
+function populateBoardRandom(userGameboard) {
+    const direction = function() { return Math.random() < 0.5 }
     
-    let carrier = Ship('Carrier', 5, false);
-    let battleship = Ship('Battleship', 4, true);
-    let destroyer = Ship('Destroyer', 3, false);
-    let submarine = Ship('Submarine', 3, false);
-    let patrolBoat = Ship('Patrol Boat', 2, false);
+    let carrier = Ship('Carrier', 5, direction());
+    let battleship = Ship('Battleship', 4, direction());
+    let destroyer = Ship('Destroyer', 3, direction());
+    let submarine = Ship('Submarine', 3, direction());
+    let patrolBoat = Ship('Patrol Boat', 2, direction());
 
-    userGameboard.placeShip(carrier, 4, 2);
-    userGameboard.placeShip(battleship, 0, 8);
-    userGameboard.placeShip(destroyer, 1, 3);
-    userGameboard.placeShip(submarine, 9, 4);
-    userGameboard.placeShip(patrolBoat, 6, 0);
+    let shipArray = [carrier, battleship, destroyer, submarine, patrolBoat];
+
+    shipArray.forEach((ship) => {
+        const col = Math.floor(Math.random() * 10);
+        const row = Math.floor(Math.random() * 10);
+        validCoordinates(col, row, userGameboard, ship)
+    })
+    
+}
+function validCoordinates(x, y, userGameboard, ship) {
+    if (userGameboard.emptyCells(ship, x, y)) {
+        userGameboard.placeShip(ship, x, y)
+    }
+    else{
+        let a = Math.floor(Math.random() * 10);
+        let b = Math.floor(Math.random() * 10);
+        validCoordinates(a, b, userGameboard, ship)
+    }
 }
 
+
 function populateBotBoard(botGameboard) {
+
+    // fixed bot board (not in use)
+    // may be useful for troubleshooting
    
     let carrier = Ship('Carrier', 5, false);
     let battleship = Ship('Battleship', 4, true);
@@ -65,8 +84,10 @@ function populateBotBoard(botGameboard) {
     botGameboard.placeShip(patrolBoat, 6, 0);
 }
 
+
+
 export {
-    populateBotBoard, 
-    populateUserBoard,
+    populateBotBoard,
+    populateBoardRandom,
     reset
 };
