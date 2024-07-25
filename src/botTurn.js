@@ -1,22 +1,27 @@
-// I'm trying to enable smarter bot plays using last hit shots to select next shots
-// It may be easier to set "moods" for bot player
-// This would likely require refactoring to replace Gameboards with players for multiple functions
-
 export default function botTurn(userGameboard) {
-    //if (didLastHit === false)
-    
     const col = Math.floor(Math.random() * 10);
     const row = Math.floor(Math.random() * 10);
-     
-    if (!userGameboard.validShot(col,row)) {
+
+    let targetedArray = userGameboard.getTargetedArray()
+    if (targetedArray.length > 0) {
+        let index = Math.floor(Math.random() * targetedArray.length)
+        let target = targetedArray.splice(index, 1); 
+        let targetCol = target[0][0];
+        let targetRow = target[0][1];
+        if (!userGameboard.validShot(targetCol, targetRow)) {
+            return botTurn(userGameboard);
+        }
+        else {
+            botShotTracker(userGameboard, targetCol, targetRow);
+            if (userGameboard.allShipsSunk()) {
+                alert('Defeat!')
+                }
+        }
+    }
+    else if (!userGameboard.validShot(col,row)) {
         return botTurn(userGameboard);
     } else { 
-        botShotTracker(userGameboard, col, row)
-        // let lastHit = didLastHit(botShotTracker(userGameboard, col, row));
-        // if (lastHit){ let aimArray = aimAround(lastHit)};
-        // new array from forEach target of aimArray - validShot()
-        // select target from array using random * array.length
-        // if lasthit = false, attack as normal with random co-ordinates
+        botShotTracker(userGameboard, col, row);
         
         if (userGameboard.allShipsSunk()) {
         alert('Defeat!')
@@ -27,41 +32,23 @@ export default function botTurn(userGameboard) {
 function botShotTracker(userGameboard, col, row) {
     const cells = document.querySelectorAll('.user-cell');
     let targetCell = (row * 10) + col
-    let target = [col, row]
     const madeHit = userGameboard.receiveAttack(col, row);
     if (madeHit) {
         cells[targetCell].classList.add("hit");
-        return target
+        let Array = focusTarget(col, row); 
+        userGameboard.setTargetedArray(Array)
+
     } else {
         cells[targetCell].classList.add("miss");
-        return target
+        return false //changed to false from target (unused at this point)
     }
 }
 
-//function not final - needs work
-function didLastHit(userGameboard ,target) {
-    //const target = [col, row]
-    const hitShots = JSON.stringify(userGameboard.getHitShots())
-    if (hitShots.includes(target)) {
-        return target
-    } else return false
-}    
-
-//function to aim around lastHit
-function aimAround(lastHit) {  
-    let col = lastHit[0];
-    let row = lastHit[1];
-    let aimArray = [];
-    aimArray.push([col + 1, row],[col - 1, row],[col, row + 1], [col, row -1]);
-    return aimArray
+function focusTarget(col ,row) {
+    let targetedArray = [];
+    if (col + 1 < 10) targetedArray.push([col + 1, row]);
+    if (col - 1 >= 0) targetedArray.push([col - 1, row]);
+    if (row + 1 < 10) targetedArray.push([col, row + 1]);
+    if (row - 1 >= 0) targetedArray.push([col, row - 1]);
+    return targetedArray
 }
-
-
-// add class tags hit / miss when shot taken (use receiveAttack return true/false)
-// maybe use another set of classes instead for greater visual distinction between boards
-
-// Either add memory for last shot - or add extra turn for a hit (leaning toward memory)
-// if last shot was a hit, attack adjacent to last hit
-
-//If (receiveAttack(col, row)) {let lasthit = {true, col, row}} 
-// else let lasthit = {false, 0, 0}

@@ -1,27 +1,30 @@
-import Ship from './ships';
-
 export default function Gameboard() {
     let gameboard = [];
     let missedShots = [];
     let hitShots = [];
     let sunkenShips = [];
-    //const allShots = (function() {return missedShots.concat(hitShots)})();
-    
+    let targetedArray = []
     
     for (let i = 0; i < 10; i++) {
         gameboard.push(['','','','','','','','','',''])
+    }
+
+    function setTargetedArray(Array) {
+        targetedArray = targetedArray.concat(Array) 
+        return targetedArray
+    }
+
+    function getTargetedArray() {
+        return targetedArray
     }
 
     function placeShip(shipObject, x, y) {
         let length = shipObject.shipLength;
         let horizontal = shipObject.horizontal;
 
-        // this validDrop check redundant when using randomized ship placement
-        // still useful if using manual placement
-        if (!validDrop(x, y, length, horizontal)) {
+        if (!validDrop(x, y, length, horizontal)) { // this validDrop check redundant when using randomized ship placement (still useful if using manual placement)
             throw new Error ('placement invalid, entireity of ship must be in bounds')
         }
-    
         for (let i = 0; i < length; i++) {
             if(horizontal){
                 gameboard[y][x+i] = shipObject
@@ -31,7 +34,6 @@ export default function Gameboard() {
             }
         }    
         return gameboard[y][x];
-
     }
     
     function receiveAttack(x, y) {
@@ -73,7 +75,6 @@ export default function Gameboard() {
         if (!validDrop(x, y, length, horizontal)) {
             return false
         }
-
         for (let i = 0; i < length; i++) {
             if (horizontal && (gameboard[y][x+i] !== "")) {
                 return false
@@ -129,6 +130,8 @@ export default function Gameboard() {
         validShot, 
         validDrop, 
         allShipsSunk,
-        emptyCells
+        emptyCells,
+        setTargetedArray,
+        getTargetedArray
     };
 }
