@@ -1,5 +1,3 @@
-//change position to orientation
-
 export default function Ship(shipType, length, orientation) {
     let hits = 0
     let sunk = false

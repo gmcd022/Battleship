@@ -6,24 +6,66 @@
     <title>Battleship</title>
 </head>
 <body>
-    <div id= "page-container"> 
+    <div id="page-container"> 
 
-        <div id= "userBoardContainer">
+        <div id="userBoardContainer">
             <h1> User Ocean Grid</h1>
-            <div class= "userGameboard board">
+            <div class="userGameboard board">
                 
             </div>
         </div>
 
-        <div id= "botBoardContainer">
+        <div id="botBoardContainer">
             <h1> Bot Ocean Grid</h1>
-            <div class= "botGameboard board">
+            <div class="botGameboard board">
             </div>
         </div>
 
-        <div class="buttonContainer">
-        <button class= "resetButton button">RESET</button>
-        <button class= "randomizeButton button">RANDOMIZE</button>
+        <div class="button-container">
+        <button class="reset-button button">RESET</button>
+        <button class="clear-button button">CLEAR</button>
+        </div>
+
+        <div class="ship-container-wrapper">
+            <div class="ship-container">
+                <h2>Place your ships</h2>
+                <button class="rotate-button button">Rotate Ships</button>
+                <div class="drop-ship" draggable="true" data-length="5">
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                </div>
+                <div class="drop-ship" draggable="true" data-length="4">
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                </div>
+                <div class="drop-ship" draggable="true" data-length="3">
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                </div>
+                <div class="drop-ship" draggable="true" data-length="3">
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                </div>
+                <div class="drop-ship" draggable="true" data-length="2">
+                    <div class="ship-cell"></div>
+                    <div class="ship-cell"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <p>Mission Accomplished!</p>
+                <button class="modal-reset-button button">RESET</button>
+            </div>
         </div>
 
     </div>

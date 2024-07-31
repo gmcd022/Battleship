@@ -13,6 +13,13 @@ export default function botTurn(userGameboard) {
         }
         else {
             botShotTracker(userGameboard, targetCol, targetRow);
+            let target = userGameboard.gameboard[targetRow][targetCol];
+            if (userGameboard.isTargetSunk(target)) {
+                userGameboard.overwriteTargetedArray([])
+                // this dumps targeted array when a ship is sunk
+                // in some instances this is worse, mostly better
+            }
+
             if (userGameboard.allShipsSunk()) {
                 alert('Defeat!')
                 }
@@ -37,6 +44,7 @@ function botShotTracker(userGameboard, col, row) {
         cells[targetCell].classList.add("hit");
         let Array = focusTarget(col, row); 
         userGameboard.setTargetedArray(Array)
+        return true
 
     } else {
         cells[targetCell].classList.add("miss");

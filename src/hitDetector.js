@@ -1,4 +1,5 @@
 import botTurn from "./botTurn";
+import { endGame } from "./gamelogic";
 
 export default function hitDetector(cell, i, botGameboard, userGameboard) {
     const row = Math.floor(i/10);
@@ -9,6 +10,7 @@ export default function hitDetector(cell, i, botGameboard, userGameboard) {
     } else {
         cell.classList.add('miss');   
     }
-    if (botGameboard.allShipsSunk()) alert('Victory!');
-    botTurn(userGameboard)
+    if (botGameboard.allShipsSunk()) {
+        endGame() //alert('Victory!'); // run endGame
+    } botTurn(userGameboard)
     }

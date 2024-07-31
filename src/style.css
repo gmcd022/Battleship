@@ -15,13 +15,26 @@
   grid-column: 1/2;
   grid-row: 1/2;
 }
+
 #botBoardContainer {
   justify-self: center;
   grid-column: 3/4;
   grid-row: 1/2
 }
 
-.buttonContainer {
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.button-container {
   grid-column: 2/3;
   grid-row: 2/3;
 
@@ -30,11 +43,62 @@
 
 }
 
+.ship-container-wrapper {
+  grid-column: 2/3;
+  grid-row: 1/2;
+}
+
+.ship-container {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-items: center;
+}
+
+.ship-container:has(.drop-ship.vertical) {
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.rotate-button {
+  width: 100%;
+  height: 70px;
+}
+
+.drop-ship {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  align-self: center;
+  justify-self: center;
+
+}
+
+.drop-ship.vertical {
+  flex-direction: column;
+  align-self: center;
+}
+
+.ship-cell {
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+}
+
 .cell {
   border: 1px solid black;
   width: 10%;
   height: 10%;
   background-color: cornflowerblue;
+}
+
+.cell:hover {
+  cursor: pointer;
+  border: 3px solid aquamarine ;
 }
 
 .board {

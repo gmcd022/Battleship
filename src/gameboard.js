@@ -18,6 +18,11 @@ export default function Gameboard() {
         return targetedArray
     }
 
+    function overwriteTargetedArray(Array) {
+        targetedArray = Array
+        return targetedArray
+    }
+
     function placeShip(shipObject, x, y) {
         let length = shipObject.shipLength;
         let horizontal = shipObject.horizontal;
@@ -117,6 +122,12 @@ export default function Gameboard() {
         else return false
     }
 
+    function isTargetSunk(target) {
+        if (getSunkShips().includes(target)) {
+            return true;
+        } else return false
+    }
+
     return {
         gameboard, 
         placeShip, 
@@ -125,13 +136,15 @@ export default function Gameboard() {
         getHitShots, 
         getMissedShots, 
         getAllShots, 
-        getSunkShips, 
+        getSunkShips,
+        isTargetSunk, 
         logSink, 
         validShot, 
         validDrop, 
         allShipsSunk,
         emptyCells,
         setTargetedArray,
-        getTargetedArray
+        getTargetedArray,
+        overwriteTargetedArray
     };
 }
