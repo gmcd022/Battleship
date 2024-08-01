@@ -17,12 +17,7 @@ rotateButton.addEventListener('click', () => {rotateShips()});
 
 reset();
 
-//drag and drop functions
 
-function drop(event) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData(ship)
-}
 
 function displayModal() {
     const modal = document.querySelector('.modal');

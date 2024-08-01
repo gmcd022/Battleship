@@ -56,10 +56,13 @@ function clear() {
     const botBoard = document.querySelector('.botGameboard');
 
     fillBotBoard(botBoard, botGameboard, userGameboard);
-    fillUserBoard(userBoard);
+    fillUserBoard(userBoard, userGameboard); // 01 Aug add userGameboard parameter
     
     //populateBoardRandom(botGameboard);
     //populateBoardRandom(userGameboard);
+
+    //01 Aug drag test
+    handleDrag();
 
     showUserShips(userGameboard.getGameboard());
 }
@@ -94,6 +97,36 @@ function validCoordinates(x, y, userGameboard, ship) {
     }
 }
 
+// handleDrop function for drag & drop 
+
+function handleDrop(event, targetCell, userGameboard) {
+    event.preventDefault();
+
+    const length = parseInt(event.dataTransfer.getData('length'), 10);
+    const shipName = event.dataTransfer.getData('name');
+    const classList = event.dataTransfer.getData('classList');
+    const horizontal  = !classList.includes('vertical');
+
+    let shipObject = new Ship(shipName, length, horizontal);
+    let col = targetCell % 10;
+    let row = Math.floor(targetCell / 10);
+
+    userGameboard.placeShip(shipObject, col, row);
+    showUserShips(userGameboard.getGameboard());
+
+}
+
+function handleDrag() {
+    document.querySelectorAll('.drop-ship').forEach((ship) => {
+        ship.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('classList', event.currentTarget.classList);
+            event.dataTransfer.setData('length', event.currentTarget.dataset.length);
+            event.dataTransfer.setData('name', event.currentTarget.dataset.name);
+        })
+    })
+
+}
+
 function endGame() {
     displayModal()
 }
@@ -102,6 +135,8 @@ function endGame() {
 
 export {
     populateBoardRandom,
+    handleDrop,
+    handleDrag,
     reset,
     clear,
     endGame
