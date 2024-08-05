@@ -1,30 +1,19 @@
-import './style.css';
 import { reset, clear, start } from './gamelogic';
 
-// ADD index.js as webPack entry - revert DOM.js to normal
+function initializeButtons() {
 
+    const resetButton = document.querySelector('.reset-button');
+    resetButton.addEventListener('click', () => {reset()});
 
-//add these in HTML build node
+    const clearButton = document.querySelector('.clear-button');
+    clearButton.addEventListener('click', () => {clear()});
 
-const resetButton = document.querySelector('.reset-button');
-resetButton.addEventListener('click', () => {reset()});
+    const startButton = document.querySelector('.start-button');
+    startButton.addEventListener('click', () => {start()});
 
-const clearButton = document.querySelector('.clear-button');
-clearButton.addEventListener('click', () => {clear()});
-
-const startButton = document.querySelector('.start-button');
-startButton.addEventListener('click', () => {start()});
-
-const modalResetButton = document.querySelector('.modal-reset-button');
-modalResetButton.addEventListener('click', () => {reset()});
-
-
-//this can also be in HTML build node but only after HTML built
-
-
-reset();
-
-
+    const modalResetButton = document.querySelector('.modal-reset-button');
+    modalResetButton.addEventListener('click', () => {reset()});
+}
 
 function displayModal() {
     const modal = document.querySelector('.modal');
@@ -41,4 +30,4 @@ function rotateShips() {
     dropShip.forEach(x => x.classList.toggle('vertical'))
 }
 
-export {displayModal, hideModal, rotateShips}
+export {displayModal, hideModal, rotateShips, initializeButtons}
