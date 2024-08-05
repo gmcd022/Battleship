@@ -16,7 +16,7 @@
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   displayModal: () => (/* binding */ displayModal),\n/* harmony export */   hideModal: () => (/* binding */ hideModal),\n/* harmony export */   rotateShips: () => (/* binding */ rotateShips)\n/* harmony export */ });\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _gamelogic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gamelogic */ \"./src/gamelogic.js\");\n\n\n\n// ADD index.js as webPack entry - revert DOM.js to normal\n\n//add these in HTML build node\n\nvar resetButton = document.querySelector('.reset-button');\nresetButton.addEventListener('click', function () {\n  (0,_gamelogic__WEBPACK_IMPORTED_MODULE_1__.reset)();\n});\nvar clearButton = document.querySelector('.clear-button');\nclearButton.addEventListener('click', function () {\n  (0,_gamelogic__WEBPACK_IMPORTED_MODULE_1__.clear)();\n});\nvar startButton = document.querySelector('.start-button');\nstartButton.addEventListener('click', function () {\n  (0,_gamelogic__WEBPACK_IMPORTED_MODULE_1__.start)();\n});\nvar modalResetButton = document.querySelector('.modal-reset-button');\nmodalResetButton.addEventListener('click', function () {\n  (0,_gamelogic__WEBPACK_IMPORTED_MODULE_1__.reset)();\n});\n\n//this can also be in HTML build node but only after HTML built\n\n(0,_gamelogic__WEBPACK_IMPORTED_MODULE_1__.reset)();\nfunction displayModal() {\n  var modal = document.querySelector('.modal');\n  modal.style.display = 'block';\n}\nfunction hideModal() {\n  var modal = document.querySelector('.modal');\n  modal.style.display = 'none';\n}\nfunction rotateShips() {\n  var dropShip = document.querySelectorAll('.drop-ship');\n  dropShip.forEach(function (x) {\n    return x.classList.toggle('vertical');\n  });\n}\n\n\n//# sourceURL=webpack://battleships/./src/DOM.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   displayModal: () => (/* binding */ displayModal),\n/* harmony export */   hideModal: () => (/* binding */ hideModal),\n/* harmony export */   initializeButtons: () => (/* binding */ initializeButtons),\n/* harmony export */   rotateShips: () => (/* binding */ rotateShips)\n/* harmony export */ });\n/* harmony import */ var _gamelogic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gamelogic */ \"./src/gamelogic.js\");\n\nfunction initializeButtons() {\n  var resetButton = document.querySelector('.reset-button');\n  resetButton.addEventListener('click', function () {\n    (0,_gamelogic__WEBPACK_IMPORTED_MODULE_0__.reset)();\n  });\n  var clearButton = document.querySelector('.clear-button');\n  clearButton.addEventListener('click', function () {\n    (0,_gamelogic__WEBPACK_IMPORTED_MODULE_0__.clear)();\n  });\n  var startButton = document.querySelector('.start-button');\n  startButton.addEventListener('click', function () {\n    (0,_gamelogic__WEBPACK_IMPORTED_MODULE_0__.start)();\n  });\n  var modalResetButton = document.querySelector('.modal-reset-button');\n  modalResetButton.addEventListener('click', function () {\n    (0,_gamelogic__WEBPACK_IMPORTED_MODULE_0__.reset)();\n  });\n}\nfunction displayModal() {\n  var modal = document.querySelector('.modal');\n  modal.style.display = 'block';\n}\nfunction hideModal() {\n  var modal = document.querySelector('.modal');\n  modal.style.display = 'none';\n}\nfunction rotateShips() {\n  var dropShip = document.querySelectorAll('.drop-ship');\n  dropShip.forEach(function (x) {\n    return x.classList.toggle('vertical');\n  });\n}\n\n\n//# sourceURL=webpack://battleships/./src/DOM.js?");
 
 /***/ }),
 
@@ -67,6 +67,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ hitDetector)\n/* harmony export */ });\n/* harmony import */ var _botTurn__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./botTurn */ \"./src/botTurn.js\");\n/* harmony import */ var _gamelogic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gamelogic */ \"./src/gamelogic.js\");\n\n\nfunction hitDetector(cell, i, botGameboard, userGameboard) {\n  var row = Math.floor(i / 10);\n  var col = i % 10;\n  var madeHit = botGameboard.receiveAttack(col, row);\n  if (madeHit) {\n    cell.classList.add('hit');\n  } else {\n    cell.classList.add('miss');\n  }\n  if (botGameboard.allShipsSunk()) {\n    (0,_gamelogic__WEBPACK_IMPORTED_MODULE_1__.endGame)('user');\n  }\n  (0,_botTurn__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(userGameboard);\n}\n\n//# sourceURL=webpack://battleships/./src/hitDetector.js?");
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _gamelogic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./gamelogic */ \"./src/gamelogic.js\");\n/* harmony import */ var _DOM__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DOM */ \"./src/DOM.js\");\n\n\n\n(0,_DOM__WEBPACK_IMPORTED_MODULE_2__.initializeButtons)();\n(0,_gamelogic__WEBPACK_IMPORTED_MODULE_1__.reset)();\n\n//# sourceURL=webpack://battleships/./src/index.js?");
 
 /***/ }),
 
@@ -296,8 +306,8 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/DOM.js");
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
 /******/ 	
 /******/ })()
 ;
