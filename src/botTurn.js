@@ -1,3 +1,5 @@
+import { endGame } from "./gamelogic";
+
 export default function botTurn(userGameboard) {
     const col = Math.floor(Math.random() * 10);
     const row = Math.floor(Math.random() * 10);
@@ -21,7 +23,7 @@ export default function botTurn(userGameboard) {
             }
 
             if (userGameboard.allShipsSunk()) {
-                alert('Defeat!')
+                endGame('bot')
                 }
         }
     }
@@ -31,7 +33,7 @@ export default function botTurn(userGameboard) {
         botShotTracker(userGameboard, col, row);
         
         if (userGameboard.allShipsSunk()) {
-        alert('Defeat!')
+        endGame('bot')
         }
     }
 }

@@ -11,6 +11,6 @@ export default function hitDetector(cell, i, botGameboard, userGameboard) {
         cell.classList.add('miss');   
     }
     if (botGameboard.allShipsSunk()) {
-        endGame() //alert('Victory!'); // run endGame
+        endGame('user');
     } botTurn(userGameboard)
     }

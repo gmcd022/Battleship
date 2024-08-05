@@ -1,7 +1,10 @@
 import './style.css';
-import { reset, clear } from './gamelogic';
+import { reset, clear, start } from './gamelogic';
 
 // ADD index.js as webPack entry - revert DOM.js to normal
+
+
+//add these in HTML build node
 
 const resetButton = document.querySelector('.reset-button');
 resetButton.addEventListener('click', () => {reset()});
@@ -9,11 +12,15 @@ resetButton.addEventListener('click', () => {reset()});
 const clearButton = document.querySelector('.clear-button');
 clearButton.addEventListener('click', () => {clear()});
 
+const startButton = document.querySelector('.start-button');
+startButton.addEventListener('click', () => {start()});
+
 const modalResetButton = document.querySelector('.modal-reset-button');
 modalResetButton.addEventListener('click', () => {reset()});
 
-const rotateButton = document.querySelector('.rotate-button');
-rotateButton.addEventListener('click', () => {rotateShips()});
+
+//this can also be in HTML build node but only after HTML built
+
 
 reset();
 
@@ -34,4 +41,4 @@ function rotateShips() {
     dropShip.forEach(x => x.classList.toggle('vertical'))
 }
 
-export {displayModal, hideModal}
+export {displayModal, hideModal, rotateShips}
