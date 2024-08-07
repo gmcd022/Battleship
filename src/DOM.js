@@ -23,6 +23,12 @@ function displayModal() {
 function hideModal() {
     const modal = document.querySelector('.modal');
     modal.style.display = 'none';
+    if (modal.classList.contains('greenBackground')) {
+        modal.classList.remove('greenBackground');
+    }
+    if (modal.classList.contains('redBackground')) {
+        modal.classList.remove('redBackground');
+    }
 }
 
 function rotateShips() {

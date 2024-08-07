@@ -50,7 +50,7 @@ function botShotTracker(userGameboard, col, row) {
 
     } else {
         cells[targetCell].classList.add("miss");
-        return false //changed to false from target (unused at this point)
+        return false 
     }
 }
 
